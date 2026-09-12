@@ -17,13 +17,26 @@ function scrollTestimonials(direction) {
     }
 }
 
-// Login Form Submit Alert Handler
-const loginForm = document.getElementById('login-form');
-if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Connecting to secure authentication backend...');
-    });
+// Auth Tab Switcher (Login / Signup) for login.html
+function switchTab(tab) {
+    const loginForm = document.getElementById('form-login');
+    const signupForm = document.getElementById('form-signup');
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+
+    if (loginForm && signupForm && tabLogin && tabSignup) {
+        if (tab === 'login') {
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            tabLogin.className = "flex-1 py-2.5 rounded-xl text-xs font-bold transition bg-emerald-600 text-white shadow-sm";
+            tabSignup.className = "flex-1 py-2.5 rounded-xl text-xs font-bold transition text-gray-600 dark:text-gray-400 hover:text-gray-900";
+        } else {
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            tabSignup.className = "flex-1 py-2.5 rounded-xl text-xs font-bold transition bg-emerald-600 text-white shadow-sm";
+            tabLogin.className = "flex-1 py-2.5 rounded-xl text-xs font-bold transition text-gray-600 dark:text-gray-400 hover:text-gray-900";
+        }
+    }
 }
 
 // Theme Switching Logic (System, Light, Dark)
@@ -40,7 +53,6 @@ function applyTheme(theme) {
         root.classList.remove('dark');
         localStorage.setItem('theme', 'light');
     } else {
-        // System Default
         localStorage.removeItem('theme');
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             root.classList.add('dark');
@@ -50,13 +62,11 @@ function applyTheme(theme) {
     }
 }
 
-// Initialize theme on page load based on saved preference or system
 const savedTheme = localStorage.getItem('theme') || 'system';
 if (themeSelector) themeSelector.value = savedTheme;
 if (mobileThemeSelector) mobileThemeSelector.value = savedTheme;
 applyTheme(savedTheme);
 
-// Event Listeners for Theme Dropdowns
 if (themeSelector) {
     themeSelector.addEventListener('change', (e) => {
         applyTheme(e.target.value);
