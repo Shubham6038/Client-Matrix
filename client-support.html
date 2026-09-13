@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Helpdesk | Client Matrix</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandGreen: '#059669',
+                        brandGreenHover: '#047857',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome & Inter Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Custom CSS Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-bg text-gray-800 dark:text-gray-100 antialiased selection:bg-emerald-600 selection:text-white transition-colors duration-200 flex flex-col min-h-screen justify-between">
+
+    <!-- TOP NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-[#0b0f19]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="client-dashboard.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-700 to-teal-400 p-0.5 shadow-md flex items-center justify-center text-white">
+                        <i class="fa-solid fa-chart-line text-base"></i>
+                    </div>
+                    <span class="text-lg font-black tracking-tight text-gray-900 dark:text-white">CLIENT<span class="text-emerald-600">MATRIX</span></span>
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="client-dashboard.html" class="text-xs font-bold text-emerald-600 dark:text-emerald-400 transition">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Back to Dashboard
+                </a>
+                <select id="theme-selector" class="px-3 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-700 dark:text-gray-300 focus:outline-none focus:border-emerald-600 cursor-pointer">
+                    <option value="system">💻 System</option>
+                    <option value="light">☀️ Light</option>
+                    <option value="dark">🌙 Dark</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- SUPPORT CONTENT -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <div class="agency-card p-8 sm:p-10 rounded-3xl shadow-xl mb-10">
+            <div class="text-center mb-8">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center mx-auto mb-3 text-lg font-bold">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h1 class="text-2xl font-black text-gray-900 dark:text-white">Client Support & Helpdesk</h1>
+                <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">Facing issues with auto-publishing, billing, or KYC? Raise a ticket below.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); alert('Support ticket submitted successfully! Our team will respond within 2 hours.');" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Your Name / Company</label>
+                        <input type="text" required placeholder="Apex Retail" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Issue Category</label>
+                        <select class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600">
+                            <option>Social Account Integration / API</option>
+                            <option>Razorpay Subscription & Billing</option>
+                            <option>Design Task & Asset Delivery</option>
+                            <option>General Inquiry</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Describe Your Issue</label>
+                    <textarea rows="4" required placeholder="Write details here..." class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 transition">
+                    Submit Support Ticket <i class="fa-solid fa-paper-plane ml-1"></i>
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-6 text-center text-xs text-gray-500">
+        <p>© 2026 Client Matrix Ecosystem. Support Helpdesk.</p>
+    </footer>
+
+    <!-- Custom JavaScript Link -->
+    <script src="script.js"></script>
+</body>
+</html>

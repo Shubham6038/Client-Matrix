@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Login & Authentication | Client Matrix</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandGreen: '#059669',
+                        brandGreenHover: '#047857',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome & Inter Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Custom CSS Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 dark:bg-[#0b0f19] text-gray-800 dark:text-gray-100 antialiased selection:bg-emerald-600 selection:text-white transition-colors duration-200 flex flex-col min-h-screen justify-between">
+
+    <!-- TOP NAVIGATION / BACK TO HOME -->
+    <header class="w-full bg-white/95 dark:bg-[#0b0f19]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-700 to-teal-400 p-0.5 shadow-md flex items-center justify-center text-white">
+                    <i class="fa-solid fa-chart-line text-base"></i>
+                </div>
+                <span class="text-lg font-black tracking-tight text-gray-900 dark:text-white">CLIENT<span class="text-emerald-600">MATRIX</span></span>
+            </a>
+            <a href="index.html" class="text-xs font-bold text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition">
+                <i class="fa-solid fa-arrow-left mr-1.5"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- AUTH CONTAINER SECTION -->
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-md agency-card p-8 sm:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+            
+            <!-- Toggle Tabs (Login / Signup) -->
+            <div class="flex rounded-2xl bg-gray-100 dark:bg-gray-800 p-1.5 mb-8">
+                <button id="tab-login" onclick="switchTab('login')" class="flex-1 py-2.5 rounded-xl text-xs font-bold transition bg-emerald-600 text-white shadow-sm">
+                    Sign In
+                </button>
+                <button id="tab-signup" onclick="switchTab('signup')" class="flex-1 py-2.5 rounded-xl text-xs font-bold transition text-gray-600 dark:text-gray-400 hover:text-gray-900">
+                    Register Client (KYC)
+                </button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="form-login" onsubmit="event.preventDefault(); alert('Login request sent to backend (KYC & Subscription check active)...');" class="space-y-4">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black text-gray-900 dark:text-white">Welcome Back</h2>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">Enter your credentials based on your assigned role</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Email Address</label>
+                    <input type="email" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Password</label>
+                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Select Role</label>
+                    <select class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600">
+                        <option>Super Admin (Owner)</option>
+                        <option>Agency Staff Admin</option>
+                        <option>Client (Requires KYC Approval)</option>
+                        <option>Content Manager</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 transition mt-2">
+                    Authenticate & Sign In <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </form>
+
+            <!-- SIGNUP / KYC REGISTRATION FORM (Hidden by default) -->
+           <form id="form-signup" onsubmit="event.preventDefault(); alert('Registration successful! Please complete your subscription payment.'); window.location.href='subscription.html';" class="space-y-4 hidden">                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black text-gray-900 dark:text-white">Client Registration</h2>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">Submit company details & KYC documents for review</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Full Name / Company Name</label>
+                    <input type="text" required placeholder="Apex Retail Pvt Ltd" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Business Email</label>
+                    <input type="email" required placeholder="contact@apexretail.com" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Create Password</label>
+                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Upload KYC Document (PAN / GST / ID)</label>
+                    <input type="file" required class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-xs focus:outline-none">
+                    <p class="text-[10px] text-amber-500 mt-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Note: Login will remain locked until Super Admin approves your KYC.</p>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 transition mt-2">
+                    Submit for KYC Verification <i class="fa-solid fa-shield-check ml-1"></i>
+                </button>
+            </form>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-6 text-center text-xs text-gray-500">
+        <p>© 2026 Client Matrix Ecosystem. Secure Multi-Tenant Authentication.</p>
+    </footer>
+
+    <!-- Custom JavaScript Link -->
+    <script src="script.js"></script>
+</body>
+</html>
